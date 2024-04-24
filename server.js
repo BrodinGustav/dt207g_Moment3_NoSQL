@@ -62,6 +62,15 @@ app.post("/cv", async(req, res) => {
 
 
 //Route för delete
+app.delete("/cv/:id", async(req, res) => {
+    try {
+        let result = await cv.deleteOne({_id: req.params.id});   //Hämtar in ID för routeparametern
+    
+        return res.json(result);
+    }catch(error) {
+        return res.status(400).json(error);
+    }
+});
 
 
 
