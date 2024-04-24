@@ -17,9 +17,35 @@ mongoose.connect("mongodb://localhost:27017/mom3_noSQL").then(() => {
     console.log("Error connecting to database" + error);
 })
 
+//CV-Schema
+const cvSchema = new mongoose.Schema({
+    companyname: {
+        type: String,
+        required: true,
+    },
+    jobtitle: {
+        type: String,
+        required: true,
+    },
+    location: {
+        type: String,
+        required:true
+    }
+}); 
+
+//Inkludera schemat till databasen
+const cv = mongoose.model("Cv", cvSchema);      //model motsvarar 1 tabell i databasen. Tabellens namn blir Cv och det är strukturen från cvSchema som vi vill använda
 
 //Routes
-
+app.get("/cv", async(req, res) => {              //async används då anrop kommer göras till databasen
+    try { 
+        let result = await cv.find({});         //Hämta in all data från cv-schemat
+    
+    return res.json(result);
+    }catch(error) {
+        return res.status(500).json(error);
+    }
+})
 
 app.listen(port, () => {
     console.log("Server is running on port:" + port);
