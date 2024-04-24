@@ -21,15 +21,15 @@ mongoose.connect("mongodb://localhost:27017/mom3_noSQL").then(() => {
 const cvSchema = new mongoose.Schema({
     companyname: {
         type: String,
-        required: true,
+        required: [true, "Företagsnamn måste skickas med"],
     },
     jobtitle: {
         type: String,
-        required: true,
+        required: [true, "Jobbtitel måste skickas med"],
     },
     location: {
         type: String,
-        required:true
+        required:[true, "Arbetets plats måste skickas med"]
     }
 }); 
 
@@ -46,6 +46,24 @@ app.get("/cv", async(req, res) => {              //async används då anrop komm
         return res.status(500).json(error);
     }
 })
+
+//Skapa den post i databasen
+app.post("/cv", async(req, res) => {
+    try {
+        let result = await cv.create(req.body)   //Tar in req från klientsidan och skickar med svaret (bodyn) vi får till createmetoden
+    
+        return res.json(result);
+    }catch(error) {
+        return res.status(400).json(error);
+    }
+});
+
+//Route för update
+
+
+//Route för delete
+
+
 
 app.listen(port, () => {
     console.log("Server is running on port:" + port);
