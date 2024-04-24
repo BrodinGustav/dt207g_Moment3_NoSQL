@@ -59,16 +59,26 @@ app.post("/cv", async(req, res) => {
 });
 
 //Route för update
+app.put("/cv/:id", async(req, res) => {
+try{
+    let result = await cv.updateOne({_id: req.params.id}, req.body); //Hämtar in ID från routerparametern samt använder req.body för att specificera uppdateringen som kommer från klientsidan.
+
+    return res.json(result);
+}    catch(error) {
+    return res.status(500).json(error)
+}
+});
+
 
 
 //Route för delete
-app.delete("/cv/:id", async(req, res) => {
+app.delete("/cv/:id", async(req, res) => {                       
     try {
         let result = await cv.deleteOne({_id: req.params.id});   //Hämtar in ID för routeparametern
     
         return res.json(result);
     }catch(error) {
-        return res.status(400).json(error);
+        return res.status(500).json(error);
     }
 });
 
