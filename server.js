@@ -47,7 +47,7 @@ app.get("/cv", async(req, res) => {              //async används då anrop komm
     }
 })
 
-//Skapa den post i databasen
+//Skapa en post i databasen
 app.post("/cv", async(req, res) => {
     try {
         let result = await cv.create(req.body)   //Tar in req från klientsidan och skickar med svaret (bodyn) vi får till createmetoden
