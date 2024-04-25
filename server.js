@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 //Anslutning till mongodb
-mongoose.connect("mongodb://localhost:27017/mom3_noSQL").then(() => {
+mongoose.connect("mongodb://127.0.0.1:27017/mom3_noSQL").then(() => {
     console.log("Connected to MongoDB");
 }).catch((error) => {
     console.log("Error connecting to database" + error);
