@@ -2,6 +2,7 @@
 const express = require('express');         // Ramverk för applikationen
 const cors = require ('cors');              //Möjliggör korsdomän förfrågningar till servern
 const mongoose = require ('mongoose');      //Ramverk för mongoDB
+const { ObjectId } = require('mongodb');    //
 
 const app = express();
 const port = process.env.PORT || 3000;      //Omvanldar inkommande JSON-data till JS-objekt
@@ -74,8 +75,15 @@ try{
 //Route för delete
 app.delete("/cv/:id", async(req, res) => {                       
     try {
-        let result = await cv.deleteOne({_id: req.params.id});   //Hämtar in ID för routeparametern
-    
+
+        const cvId = req.params.id;
+
+        let result = await cv.findByIdAndDelete(cvId);
+
+        if(!result) {
+            return res.status(404).json({message: "Inget CV hittade med det angivna ID:et"});
+        }
+
         return res.json(result);
     }catch(error) {
         return res.status(500).json(error);
