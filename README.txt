@@ -18,7 +18,8 @@ Denna URI används för att lägga till ny data i databasen. Användaren måste 
 
 ***Uppdatera en befintlig post i databasen***
 PUT /cv/:id
-Denna URI används för att uppdatera en befintlig post i databasen. Användaren måste ange ID:t för den arbetslivserfarenhet som ska uppdateras i URL:en och skicka med de uppdaterade uppgifterna i request body: companyname, jobtitle, location.
+Denna URI används för att uppdatera en befintlig post i databasen. 
+Användaren måste ange ID:t för den arbetslivserfarenhet som ska uppdateras i URL:en och skicka med de uppdaterade uppgifterna i request body: companyname, jobtitle, location, responsibilities.
 
 ***Ta bort en befintlig post i databasen***
 DELETE /cv/:id
