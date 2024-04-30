@@ -4,11 +4,11 @@ const cors = require ('cors');              //Möjliggör korsdomän förfrågni
 const mongoose = require ('mongoose');      //Ramverk för mongoDB
 
 const app = express();
-const port = process.env.PORT || 3000;      //Omvanldar inkommande JSON-data till JS-objekt
+const port = process.env.PORT || 3000;      //Tilldelar port
 
 //Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json());                    //Omvanldar inkommande JSON-data till JS-objekt
 
 //Anslutning till mongodb
 mongoose.connect("mongodb://127.0.0.1:27017/mom3_noSQL").then(() => {
